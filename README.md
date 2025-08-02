@@ -9,10 +9,17 @@ Watch Later Roulette is a simple browser extension that helps you finally start 
 This project is currently under development. Features and UI are subject to change.
 
 🔧 What It Does
-- Fetches all videos from your Watch Later playlist and stores them locally for quick access
+- Fetches video from your Watch Later playlist (TODO: store them locally for quick access)
 - Randomly picks 5 videos to help you start watching
 - Includes simple management tools like removing videos you don’t want to watch
 - Helps reduce decision fatigue and keeps your playlist manageable
+
+## ⚠️ Limitations
+
+- **No dark mode** — beware of potential retina damage (just kidding... kind of)  
+- **Only the first 100 videos** can be fetched from your Watch Later playlist  
+    - Want more randomness? Scroll to the bottom of the playlist first to load more videos, then hit **Refresh**  
+- **Some main functions are still under development**, so don’t be surprised if things occasionally break  
 
 ## 📦 Installation
 
