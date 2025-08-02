@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Watch Later Manager",
     "version": "1.0",
-    "description": "Easily manage your Watch Later playlist on YouTube with smart tools.",
+    "description": "Easily manage your Watch Later playlist on YouTube.",
     "permissions": [
         "scripting",
         "tabs"
