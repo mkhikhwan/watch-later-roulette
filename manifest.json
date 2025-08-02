@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Watch Later Manager",
+    "version": "1.0",
+    "description": "Easily manage your Watch Later playlist on YouTube with smart tools.",
+    "permissions": [
+        "scripting",
+        "tabs"
+    ],
+    "host_permissions": [
+        "https://www.youtube.com/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["https://www.youtube.com/playlist?list=WL"],
+            "js": ["content.js"]
+        }
+    ]
+}
