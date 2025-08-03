@@ -1,3 +1,7 @@
+window.addEventListener('load', () => {
+    setTimeout(injectUI, 1000);
+});
+
 function injectUI() {
     closeAlert();
     const container = document.querySelector('#contents');
@@ -37,7 +41,7 @@ function initUI(container) {
 
     // Title
     const title = document.createElement('div');
-    title.textContent = 'Watch Later Manager';
+    title.textContent = 'Watch Later Roulette';
     title.style.marginBottom = '12px';
     ui.appendChild(title);
 
@@ -67,38 +71,89 @@ async function initVideoListContainer() {
     const videoList = await initVideoList();
     for (let i = 0; i < videoList.length; i++) {
         const videoData = videoList[i];
-        const title = videoData.title;
 
-        const row = document.createElement('div');
-        row.style.display = 'flex';
-        row.style.justifyContent = 'space-between';
-        row.style.alignItems = 'center';
-        row.style.padding = '6px 0';
-        row.style.borderBottom = '1px solid #eee';
+        const row = createVideoRow(i, videoData);
 
-        const label = document.createElement('span');
-        label.textContent = `${i + 1}. ${title}`;
-
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'Remove';
-        removeBtn.style.marginLeft = '12px';
-        removeBtn.style.padding = '4px 10px';
-        removeBtn.style.cursor = 'pointer';
-        removeBtn.style.backgroundColor = '#e74c3c';
-        removeBtn.style.color = '#fff';
-        removeBtn.style.border = 'none';
-        removeBtn.style.borderRadius = '4px';
-        removeBtn.onclick = () => row.remove();
-
-        row.appendChild(label);
-        row.appendChild(removeBtn);
         listWrapper.appendChild(row);
     }
 }
 
-window.addEventListener('load', () => {
-    setTimeout(injectUI, 1000);
-});
+function createVideoRow(i, videoData) {
+    const title = videoData.title;
+
+    // Container
+    const row = document.createElement('div');
+    row.style.display = "flex";
+    row.style.flexDirection = "row";
+    row.style.gap = "10px";
+    row.style.marginTop = "15px";
+
+    // Image
+    const divImage = document.createElement('div');
+    divImage.style.width = '160px';
+    divImage.style.height = '90px';
+    const image = document.createElement('img');
+    image.src = videoData.thumbnail_url;
+    image.style.width = '100%';
+    image.style.height = '100%';
+    image.style.objectFit = 'cover';
+    image.style.display = 'block';
+    divImage.appendChild(image);
+
+    // Text
+    const divText = document.createElement('div');
+    divText.style.display = 'flex';
+    divText.style.flexDirection = 'column';
+    divText.style.gap = '4px';
+    divText.style.maxWidth = '800px';
+
+    // Title
+    const divTitle = document.createElement('div');
+    const pTitle = document.createElement('p');
+    pTitle.innerText = videoData.title;
+    pTitle.style.fontWeight = 'bold';
+    pTitle.style.margin = '0';
+    pTitle.style.overflow = 'hidden';
+    pTitle.style.textOverflow = 'ellipsis';
+    pTitle.style.whiteSpace = 'nowrap';
+    divTitle.appendChild(pTitle);
+
+    // Channel Name
+    const divChannel = document.createElement('div');
+    const pChannel = document.createElement('p');
+    pChannel.innerText = videoData.author_name;
+    pChannel.style.color = '#555';
+    pChannel.style.fontSize = '0.9em';
+    pChannel.style.margin = '0';
+    divChannel.appendChild(pChannel);
+
+    // Buttons
+    const divButtons = document.createElement('div');
+    divButtons.style.display = 'flex';
+    divButtons.style.gap = '8px';
+    divButtons.style.marginTop = '4px';
+
+    const removeButton = document.createElement('button');
+    removeButton.innerText = 'Remove';
+    removeButton.style.padding = '4px 8px';
+
+    const skipButton = document.createElement('button');
+    skipButton.innerText = 'Skip';
+    skipButton.style.padding = '4px 8px';
+
+    divButtons.appendChild(removeButton);
+    divButtons.appendChild(skipButton);
+
+    // Append all
+    divText.appendChild(divTitle);
+    divText.appendChild(divChannel);
+    divText.appendChild(divButtons);
+
+    row.appendChild(divImage);
+    row.appendChild(divText);
+
+    return row;
+}
 
 function grabAllVideoLinks(){
     const links = document.querySelectorAll("ytd-playlist-video-renderer a#video-title");
