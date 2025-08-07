@@ -49,8 +49,9 @@ function initUI(container) {
     const refreshBtn = document.createElement('button');
     refreshBtn.textContent = '🔄 Refresh List';
     refreshBtn.onclick = () => {
-        // For now, this does nothing
-        console.log('Refresh button clicked (placeholder)');
+        const listWrapper = document.getElementById("watch-later-video-list");
+        listWrapper.replaceChildren();
+        initVideoListContainer();
     };
     ui.appendChild(refreshBtn);
 
