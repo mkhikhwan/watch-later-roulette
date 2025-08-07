@@ -10,13 +10,13 @@ This project is currently under development. Features and UI are subject to chan
 
 🔧 What It Does
 - Fetches video from your Watch Later playlist (TODO: store them locally for quick access)
-- Randomly picks 5 videos to help you start watching
+- Randomly picks 3 videos to help you start watching
 - Includes simple management tools like removing videos you don’t want to watch
 - Helps reduce decision fatigue and keeps your playlist manageable
 
 ## ⚠️ Limitations
 
-- **No dark mode** — beware of potential retina damage (just kidding... kind of)  
+- **No dark mode** — beware of potential retina damage. 
 - **Only the first 100 videos** can be fetched from your Watch Later playlist  
     - Want more randomness? Scroll to the bottom of the playlist first to load more videos, then hit **Refresh**  
 - **Some main functions are still under development**, so don’t be surprised if things occasionally break  
