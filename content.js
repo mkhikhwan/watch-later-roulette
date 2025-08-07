@@ -87,6 +87,7 @@ async function initVideoListContainer() {
 
 function createVideoRow(i, videoData) {
     const title = videoData.title;
+    const videoLink = getVideoLinkFromThumbnailLink(videoData.thumbnail_url);
 
     // Container
     const row = document.createElement('div');
@@ -159,6 +160,11 @@ function createVideoRow(i, videoData) {
     row.appendChild(divImage);
     row.appendChild(divText);
 
+    row.addEventListener('click',()=>{
+        window.location.href = videoLink;
+    });
+    row.style.cursor = 'pointer';
+
     return row;
 }
 
@@ -214,4 +220,20 @@ function getThreeRandomVideos(arr){
     }
 
     return videoArr;
+}
+
+function getVideoLinkFromThumbnailLink(thumbnail_url){
+    // Hack to get youtube link from the thumbnail link provided in oembed
+
+    const match = thumbnail_url.match(/vi\/([a-zA-Z0-9_-]{11})\//);
+    let videoUrl = '';
+
+    if (match) {
+        const videoId = match[1]
+        videoUrl = `/watch?v=${videoId}`;
+    } else {
+        console.warn("No video ID found");
+    }
+
+    return videoUrl;
 }
