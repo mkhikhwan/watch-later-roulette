@@ -52,6 +52,12 @@ function initUI(container) {
         const listWrapper = document.getElementById("watch-later-video-list");
         listWrapper.replaceChildren();
         initVideoListContainer();
+
+        // Add debounce to avoid spamming
+        refreshBtn.disabled = true;
+        setTimeout(()=>{
+            refreshBtn.disabled = false;
+        },3000);
     };
     ui.appendChild(refreshBtn);
 
