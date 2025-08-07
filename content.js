@@ -183,14 +183,28 @@ async function getOEmbed(url) {
 
 async function initVideoList(){
     const videoLinks = grabAllVideoLinks();
-    const fiveVideoTemp = videoLinks.slice(0,5);
-    let fiveVideo = [];
+    const videoTemp = getThreeRandomVideos(videoLinks);
+    let videos = [];
     
-    for(let video of fiveVideoTemp){
+    for(let video of videoTemp){
         const videoData = await getOEmbed(video);
-        fiveVideo.push(videoData);
+        videos.push(videoData);
     };
 
-    console.log(fiveVideo);
-    return fiveVideo;
+    return videos;
+}
+
+function getThreeRandomVideos(arr){
+    let videoArr = [];
+
+    while(videoArr.length < 3){
+        const num = Math.floor(Math.random() * arr.length);
+        const newVideo = arr[num];
+
+        if(!videoArr.includes(newVideo)){
+            videoArr.push(newVideo);
+        }
+    }
+
+    return videoArr;
 }
