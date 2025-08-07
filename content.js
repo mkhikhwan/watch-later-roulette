@@ -11,7 +11,6 @@ function injectUI() {
         return;
     }
 
-    // Prevent duplicate injection
     if (document.getElementById('watch-later-manager-ui')) {
         return;
     }
@@ -27,7 +26,6 @@ function closeAlert() {
 }
 
 function initUI(container) {
-    // Create your UI wrapper
     const ui = document.createElement('div');
     ui.id = 'watch-later-manager-ui';
     ui.style.padding = '16px';
@@ -177,15 +175,6 @@ function grabAllVideoLinks(){
     });
     
     return videoLinks;
-}
-
-function getVideoTitle(oEmbedJson) {
-    if (!oEmbedJson || typeof oEmbedJson !== 'object') {
-        console.warn('Invalid oEmbed data');
-        return null;
-    }
-
-    return oEmbedJson.title || null;
 }
 
 async function getOEmbed(url) {
