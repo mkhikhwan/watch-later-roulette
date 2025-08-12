@@ -1,3 +1,5 @@
+let videoList = [];
+
 window.addEventListener('load', () => {
     setTimeout(injectUI, 1000);
 });
@@ -73,12 +75,11 @@ function initUI(container) {
 async function initVideoListContainer() {
     const listWrapper = document.getElementById("watch-later-video-list");
 
-    const videoList = await initVideoList();
+    await initVideoList();
     for (let i = 0; i < videoList.length; i++) {
         const videoData = videoList[i];
 
         const row = createVideoRow(i, videoData);
-
         listWrapper.appendChild(row);
     }
 }
@@ -184,6 +185,15 @@ async function getOEmbed(url) {
 }
 
 async function initVideoList(){
+    if(videoList.length === 0){
+        // On start, check first for saved data.
+        const savedVideos = JSON.parse(localStorage.getItem("videos")) || [];
+        if(savedVideos && savedVideos.length > 0){
+            videoList = savedVideos;
+            return;
+        }
+    }
+
     const videoLinks = grabAllVideoLinks();
     const videoTemp = getThreeRandomVideos(videoLinks);
     let videos = [];
@@ -193,7 +203,10 @@ async function initVideoList(){
         videos.push(videoData);
     };
 
-    return videos;
+    videoList = videos;
+
+    // Save to localStorage
+    localStorage.setItem("videos", JSON.stringify(videos));
 }
 
 function getThreeRandomVideos(arr){
